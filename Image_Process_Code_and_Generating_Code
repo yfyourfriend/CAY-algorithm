@@ -1,0 +1,39 @@
+#Image processing into RGB data-text version:
+
+
+from PIL import Image
+im=Image.open("C:\\Users\\P180003\\Desktop\\Nanana.jpg") #CHANGE THE DIRECTORY
+import numpy as np
+
+imrgb=im.convert("RGB")
+image_data=list(imrgb.getdata())
+#print(image_data)
+
+array_of_rgb_data=np.reshape(image_data,(15,45))
+print(array_of_rgb_data)
+
+#Generating 1 and 0:
+
+import numpy as np
+import random
+
+def array_15x15():
+    zero_array=np.zeros((15,15))
+    while zero_array[0][0]==0 and zero_array[0][1]==0 and zero_array[0][2]==0 and zero_array[0][3]==0:
+        for x in range(4):
+            zero_array[0][x]=random.randint(0,1)
+    for i in range (0,11):
+        zero_array[0][i+4]=zero_array[0][i]+zero_array[0][i+1]
+    for i in range(15):
+        zero_array[i][0]=zero_array[0,i]
+    for i in range(1,15):
+        if zero_array[i][0]==0:
+            for j in range(15):
+                zero_array[i][j]=zero_array[0][j]
+        else:
+            for j in range(15):
+                zero_array[i][j]=zero_array[0][14-j]
+    print(zero_array)
+
+array_15x15()
+
