@@ -40,5 +40,5 @@ def checking_for_similarity(variable_name_of_15x15_map, variable_name_of_4x4_mat
 		row15=row15+1
 		column15=0
 	print("Row=",row_position)
-	print("Column=",column_position
+	print("Column=",column_position)
 	return (row_position,column_position)
