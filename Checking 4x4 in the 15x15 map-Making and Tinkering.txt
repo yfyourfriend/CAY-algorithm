@@ -1,43 +1,44 @@
 def checking_for_similarity(variable_name_of_15x15_map, variable_name_of_4x4_matrix):
-	for i in variable_name_of_4x4_matrix:
-		for j in variable_name_of_15x15_map:
+	row4=0
+	column4=0
+	row15=0
+	column15=0
+	counter=0
+	temp_counter=0
+	dict={}
+	while row15<12:
+		while column15<12:
+			temp_row15=row15
+			while row4<4:
+				temp_column15=column15
+				while column4<4:
+					if variable_name_of_4x4_matrix[row4][column4]==variable_name_of_15x15_map[temp_row15][temp_column15]:
+						temp_counter=temp_counter+1
+					column4=column4+1
+					temp_column15=temp_column15+1	
+				row4=row4 +1
+				column4= 0
+				temp_row15=temp_row15 +1
+			if row15==0 and column15==0:
+				counter=temp_counter
+				row_position=0
+				column_position=0
+				temp_counter=0
+			else:
+				if temp_counter>=counter:
+					counter=temp_counter
+					row_position=row15
+					column_position=column15
+					temp_counter=0
+				elif counter>temp_counter:
+					counter=counter
+					temp_counter=0
+			column15=column15+1
+			row4=0
+			column4=0
 			counter=0
-			x=0
-			while j<=177: #index is from 0 to 224 for map, so we stop at 177. Why? Because we are comparing a 4x4 with 15x15, so when the element of the 15 by 15 reaches 177, we have to stop; 177 is the initial first element of a 4x4 part of our 15x15; that is, 177 is our most bottom right element in our 15x15 map
-				if j==i:
-					counter=counter+1
-				if j+1==i+1:
-					counter=counter+1
-				if j+2==i+2:
-					counter=counter+1
-				if j+3==i+3:
-					counter=counter+1
-				if j+15==i+4: #because matrix is 4x4, and map is 15x15, so the 5th dot of matrix is in the matrix's second row, and thus we have to increment the map such that the map also goes to the second row
-					counter=counter+1
-				if j+16==i+5:
-				.
-				.
-				if j+30==i+8:
-				.
-				.	
-				.
-				if j+45==i+12:
-				.
-				.
-				.
-				x=string(x) #changing x into a string
-				"counter"+"x"=counter #so, counter0 will be our first count,
-				x=int(x) #change x into integer again, so we can add 1 to x
-				x=x+1 #adding 1 to x, so that in the loop after this, we will have counter1 as our second counter
-				j=j+1 #adding 1 to j, so now our starting point will be the second element of the 15x15 map, and then we'll compare it to our captured 4x4 image
-			break #STOP THE FOR LOOP!! I just need the for loop to make a new variable called "j" for me, so that I can have a name for the first element of the 15x15 map
-		break #STOP THE OTHER FOR LOOP AS WELL!! Again, I only need a name for the first element of the 4x4 matrix
-	print(counter0)
-	print(counter1)
-	print(counter2)
-	.
-	.
-	.
-	print(counter177)
-	#after this, we just need to see which one has the highest counter count! Then, that will be the location of the robot!
-  
+		row15=row15+1
+		column15=0
+	print("Row=",row_position)
+	print("Column=",column_position
+	return (row_position,column_position)
