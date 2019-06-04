@@ -1,17 +1,16 @@
-def checking_for_similarity(variable_name_of_15x15_map, variable_name_of_4x4_matrix):
+def checking_for_similarity():
 	row4=0
 	column4=0
 	row15=0
 	column15=0
 	counter=0
 	temp_counter=0
-	dict={}
-	while row15<12:
-		while column15<12:
+	while row15 < 2**k-1-k+1:
+		while column15 < 2**k-1-k+1:
 			temp_row15=row15
-			while row4<4:
+			while row4 < k:
 				temp_column15=column15
-				while column4<4:
+				while column4 < k:
 					if variable_name_of_4x4_matrix[row4][column4]==variable_name_of_15x15_map[temp_row15][temp_column15]:
 						temp_counter=temp_counter+1
 					column4=column4+1
