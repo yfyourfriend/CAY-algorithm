@@ -1,4 +1,4 @@
-def checking_for_similarity():
+def checking_for_similarity(binaryMatrix, robot_image_binary_matrix, k):
 	row4=0
 	column4=0
 	row15=0
@@ -11,7 +11,7 @@ def checking_for_similarity():
 			while row4 < k:
 				temp_column15=column15
 				while column4 < k:
-					if variable_name_of_4x4_matrix[row4][column4]==variable_name_of_15x15_map[temp_row15][temp_column15]:
+					if robot_image_binary_matrix[row4][column4]==binaryMatrix[temp_row15][temp_column15]:
 						temp_counter=temp_counter+1
 					column4=column4+1
 					temp_column15=temp_column15+1	
