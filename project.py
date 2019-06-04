@@ -99,17 +99,48 @@ def error_check(A, k):
     return True
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
-    row = 0
-    column = 0
-    while row < (((2**k)-1)-k+1):
-        while column < (((2**k)-1)-k+1):
-            counter = 0
-            for l in range(0,k):
-                for m in range(0,k):
-                    if binaryMatrix[row + l][column + m] == robot_image_binary_matrix[0+l][0+m]:
-                        counter+=1
-            if counter == 16:
-                return (row,column)
+	row4=0
+	column4=0
+	row15=0
+	column15=0
+	counter=0
+	temp_counter=0
+	while row15 < 2**k-1-k+1:
+		while column15 < 2**k-1-k+1:
+			temp_row15=row15
+			while row4 < k:
+				temp_column15=column15
+				while column4 < k:
+					if robot_image_binary_matrix[row4][column4]==binaryMatrix[temp_row15][temp_column15]:
+						temp_counter=temp_counter+1
+					column4=column4+1
+					temp_column15=temp_column15+1	
+				row4=row4 +1
+				column4= 0
+				temp_row15=temp_row15 +1
+			if row15==0 and column15==0:
+				counter=temp_counter
+				row_position=0
+				column_position=0
+				temp_counter=0
+			else:
+				if temp_counter>=counter:
+					counter=temp_counter
+					row_position=row15
+					column_position=column15
+					temp_counter=0
+				elif counter>temp_counter:
+					counter=counter
+					temp_counter=0
+			column15=column15+1
+			row4=0
+			column4=0
+			counter=0
+		row15=row15+1
+		column15=0
+	print("Row=",row_position)
+	print("Column=",column_position)
+	return (row_position,column_position)
 
 
 
