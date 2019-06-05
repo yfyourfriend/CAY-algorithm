@@ -9,6 +9,11 @@ from binmaryMatrix_to_JPEG import *
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
     #Actually this code is fine. WE just need an auxillary code in the middle to tansfrom an image into a kxk matrix
+    """
+    This function locates the k x k binary matrix inside the 2^k-1 x 2^k-1 binary matrix
+    Input: 2^k-1 x 2^k-1 binary matrix, k x k robot_image_binary_matrix and the integer k
+    Output: the tuple that indicates the row and column of the first entry of the location of the matrix
+    """
     row = 0
     column = 0
     while row < (((2**k)-1)-k+1):
@@ -22,6 +27,9 @@ def location_identification(binaryMatrix, robot_image_binary_matrix, k):
                 return (row,column)
 
 def rotate_image():
+    """
+    This function takes in the robot_image and transforms it with various degree of freedom and then outputs a k x k image 
+    """
     pass
 
 def main():
