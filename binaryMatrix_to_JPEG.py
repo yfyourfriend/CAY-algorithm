@@ -128,18 +128,16 @@ def main():
     #Then generate a black & white image whereby every k x k frame is unique from the binary matrix
     for i in range(0,2**k):
         for j in range(0,2**k):
-            if binaryMatrix[i][j]==(255,255,255): #if it is the color white
-                binaryMatrix[i][j]=0 #binary is zero
-            elif binaryMatrix[i][j]==(0,0,0): #if it is black, then it must be a dot
-                binaryMatrix[i][j]=1 #binary is 1
-            else: #if the color is slightly black or white, i.e. gray, we must account for that too!
-                for R in range(0,100):
-                    for G in range(0,100):
-                        for B in range(0,100):
-                            if binaryMatrix[i][j]==(R,G,B): #if they range from 0 to 100, then it is closer to black
-                                binaryMatrix[i][j]==1 #therefore it is a dot
-                            else: #else, they are closer to white
-                                binaryMatrix[i][j]==0 #therefore a blank space
+            if binaryMatrix[i][j]==0: #if it is 0
+                binaryMatrix[i][j]=(255,255,255) #color is white
+            elif binaryMatrix[i][j]==1: #if it is 1
+                binaryMatrix[i][j]=(0,0,0) #color is black dot
+    im = Image.new("RGB", (2**k-1, 2**k-1)) #make a new image that is 2^k-1 by 2^k-1 pixels 
+    pix = im.load()
+    for x in range(2**k):
+        for y in range(2**k):
+            pix[x,y] = binaryMatrix[x][y] #the coordinate of our image in x and y is equal to the pixel RGB value of our binaryMatrix
+    im.save("test.JPEG", "JPEG") #we save it as test.JPEG                    
 
 
 
