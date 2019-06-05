@@ -126,8 +126,20 @@ def main():
     #We can attach maybe 1 = RGB(255,255,255) - white
     #we can attach 0 = RGB(0,0,0) - black
     #Then generate a black & white image whereby every k x k frame is unique from the binary matrix
-
-
+    for i in range(0,2**k):
+        for j in range(0,2**k):
+            if binaryMatrix[i][j]==(255,255,255): #if it is the color white
+                binaryMatrix[i][j]=0 #binary is zero
+            elif binaryMatrix[i][j]==(0,0,0): #if it is black, then it must be a dot
+                binaryMatrix[i][j]=1 #binary is 1
+            else: #if the color is slightly black or white, i.e. gray, we must account for that too!
+                for R in range(0,100):
+                    for G in range(0,100):
+                        for B in range(0,100):
+                            if binaryMatrix[i][j]==(R,G,B): #if they range from 0 to 100, then it is closer to black
+                                binaryMatrix[i][j]==1 #therefore it is a dot
+                            else: #else, they are closer to white
+                                binaryMatrix[i][j]==0 #therefore a blank space
 
 
 
