@@ -43,9 +43,19 @@ def prime_factors(n):
     return factors
 
 def reverse_list(f):
+    """
+    This function reverses the array input
+    Input: Array 
+    Output: Reversed Array 
+    """
     return f.reverse()
 
 def gcd(f,h):
+    """
+    This functions finds the greatest common divisor between 2 polynomials f and h
+    Iput: 2 polynomials f and h
+    Output: the greatest common divisor g
+    """
     while remainderIsLeft(np.polydiv(f,g)):
         temporary = f
         f = g
@@ -76,6 +86,9 @@ def error_check(binaryMatrix, k):
     return True
 
 def binary_matrix(f):
+    """
+    This function takes in an array f of size k and forms a binary matrix 2^k -1 * 2^k -1 
+    """
     k = len(f)
     zero_array = np.zeros((2**k)-1,(2**k)-1)
     for i in range(0, k):
