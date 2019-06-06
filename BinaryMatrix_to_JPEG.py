@@ -24,7 +24,7 @@ def show_image(binaryMatrix):
     #Imput: Binary Matrix
     #Image generated from binary image
     binaryMatrix = (binaryMatrix * 255).astype(np.uint8)
-    im = Image.fromarray(x)
+    im = Image.fromarray(binaryMatrix)
     im.show()
     print(im)
    
