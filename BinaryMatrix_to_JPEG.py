@@ -8,7 +8,7 @@ def binary_Matrix(A):
     for i in range(11):
         x[0][i] = A[i]
         for i in range(0,(2**10)-1-10):
-        x[0][i+4] =( x[0][i] + x[0][i+1] ) % 2
+        x[0][i+10] =( x[0][i] + x[0][i+1] ) % 2
     for i in range((2**10)-1):
         x[i][0]=x[0][i]
     for i in range(1,(2**10)-1):
