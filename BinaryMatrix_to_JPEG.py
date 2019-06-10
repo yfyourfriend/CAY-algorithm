@@ -7,8 +7,8 @@ def binary_Matrix(A):
     x = np.zeros((1023,1023))
     for i in range(11):
         x[0][i] = A[i]
-        for i in range(0,(2**10)-1-10):
-        x[0][i+10] =( x[0][i] + x[0][i+1] ) % 2
+    for i in range(10,2014):
+        x[0][i] =( x[0][i-10] + x[0][i-3] ) % 2
     for i in range((2**10)-1):
         x[i][0]=x[0][i]
     for i in range(1,(2**10)-1):
@@ -29,7 +29,7 @@ def show_image(binaryMatrix):
     print(im)
    
 def main():
-    A = [1, 1, 1, 0, 1, 0, 1, 0, 1, 0,1]
+    A = [1, 0, 0, 0, 0, 0, 0, 1, 0, 0]
     binaryMatrix = binary_Matrix(A)
     show_image(binaryMatrix) 
     
