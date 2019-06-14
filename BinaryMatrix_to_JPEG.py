@@ -43,6 +43,24 @@ def big_M(input_mat):
                         output_mat[5*i+k][5*j+l] = shape_min[k][l]
     return output_mat
 
+def scale_binmat(input_mat,ktimes):
+    """
+    Assume input from a list of list matrix
+    Returns ktimes times bigger matrix.
+    """
+    lenmat = len(input_mat)
+    # define ktimes times bigger matrix
+    output_mat = [[0 for i in range(ktimes*lenmat)] for j in range(ktimes*lenmat)]
+
+    for i in range(lenmat):
+        for j in range(lenmat):
+            # where i,j correspond to row, col of mat
+            # Produce ktimes x ktimes for each entry
+            for k in range(ktimes):
+                for l in range(ktimes):
+                    output_mat[ktimes*i+k][ktimes*j+l] = input_mat[i][j]
+    return output_mat
+
 def show_image(binaryMatrix):
     """
     Imput: Matrix containing only 1 and 0 in its entries
@@ -54,6 +72,18 @@ def show_image(binaryMatrix):
     binaryMatrix = (binaryMatrix * 255).astype(np.uint8)
     im = Image.fromarray(binaryMatrix)
     im.show()
+
+def save_image(binaryMatrix):
+    binaryMatrix = np.array(binaryMatrix)
+    binaryMatrix = (binaryMatrix * 255).astype(np.uint8)
+    im = Image.fromarray(binaryMatrix)
+    im.save("BinaryMatoriginal" + ".jpeg", "JPEG")
+    A4len = 2480
+    # 2480 divide by total Pixels per length of matrix note k=4 this is hardcoded
+    # required_DPI = 2480 / (15*5)
+    im = im.resize((A4len,A4len), Image.ANTIALIAS)
+    im.save("BinaryMatA4size" + ".jpeg", "JPEG")
+    return
 
 def main():
     # generate first row
@@ -78,8 +108,11 @@ def main():
 
     output_mat = big_M(M)
 
+    """
     # Display image using PIL library
     show_image(output_mat)
+    """
+    # Save Image
+    save_image(output_mat)
 
 main()
-
