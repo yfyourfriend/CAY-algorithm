@@ -8,6 +8,7 @@ from scipy import *
 from binmaryMatrix_to_JPEG import *
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
+	# This function takes in 
 	row = 0
 	column = 0
 	while row < 56:
