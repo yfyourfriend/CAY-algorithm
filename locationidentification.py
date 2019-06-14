@@ -45,9 +45,9 @@ def find_image(big_image, small_image):
     	# Find exact match
     	for y, x in zip(*possible_match):
         	if np.all(im[y+1:y+h+1, x+1:x+w+1] == tpl):
-            		return (y+1, x+1)
+            		return (y+1, y+h+1, x+1, x+w+1)
 
-    	raise Exception("Image not found")
+    	return False
 
 def rotation():
 	"""
@@ -61,13 +61,16 @@ def rotation():
 	
 	#Stage 1
 	frame_of_reference = #take the smallest possible unit (5 pixel to 5 pixel)
-	filter = frame_of_reference
 	i = 0
 	for i in range(0,360):
 		frame_of_reference_rotated = frame_of_reference.Image.rotate(i)
-		if #use PIL Image filter to check for the existence of T, comparsion is rotated frame of reference and the image captured:
-			degree_of_rotation = Image.dispacement.rotation(frame_of_reference_rotated, frame_of_reference)
-			return degree_of_rotation 
+		if find_image(frame_of_reference_rotated, #image_captured_by_robot) != False:
+			      degree_of_rotation = i 
+			      (a,b,c,d) = find_image(frame_of_reference_rotated, image_captured_by_robot)
+			      if image_from_opnemv.Image.crop(a,b,c,d) == frame_of_reference_rotated: #Indentation error here. Fix later
+			      		return degree_of_rotation 
+			      		
+				
 	if [[0 for i in range(20)] for j in range(20)] == list(robot_image.getdata()) # reshape this as a
 		
 
