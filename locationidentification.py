@@ -8,7 +8,10 @@ from scipy import *
 from binmaryMatrix_to_JPEG import *
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
-	# This function takes in 
+	"""
+	This function takes in the 75 x 75 grid_map and the 20 x 20 image captured by the openmv and returns the matrix 
+	that contains the position of the image
+	"""
 	row = 0
 	column = 0
 	while row < 56:
@@ -19,7 +22,7 @@ def location_identification(binaryMatrix, robot_image_binary_matrix, k):
 					if binaryMatrix[row + l][column + m] == robot_image_binary_matrix[0 + l][0 + m]:
 						counter += 1
 			if counter == 20 * 20:
-				return (row, column) 
+				return (row, row + 19, column, column + 19)
 	return 0
 
 def rotate_image():
