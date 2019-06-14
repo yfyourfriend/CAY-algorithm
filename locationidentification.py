@@ -2,8 +2,6 @@
 from PIL import Image
 import numpy as np
 from binmaryMatrix_to_JPEG import *
-import sensor, image, time
-
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
 	"""
