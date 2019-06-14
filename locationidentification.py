@@ -21,6 +21,8 @@ def location_identification(binaryMatrix, robot_image_binary_matrix, k):
 						counter += 1
 			if counter == 20 * 20:
 				return (row, row + 19, column, column + 19)
+			column += 1
+		row += 1
 	return 0
 
 
@@ -29,17 +31,21 @@ def rotation():
 	"""
 	We will use a frame of reference (The Y as a reference frame) to compare the degree of rotation and return it. This is the
 	simplest case we can try to solve. 
-	In the 2nd stage, we check if the image captured is all black or all white. 
-	In the 3 stage (the most complicated case: where there is no complete Y in the image captured, rather fragments of this. Figure 
+	In the 2nd stage, we check if the image captured is all black or all white - (In our current map, there are exactly only 1 all
+	black case and 0 all white square. 
+	In the 3 stage (the most complicated case: where there is no complete Y in the image captured, rather fragments of Y or no Y at all. Figure 
 	out a way to find out the location here.
 	"""
 	
 	#Stage 1
-	frame_of_reference = #take the smallest possible unit (5 pixel to 5 pixel) 
-	for i in range(0,360):
-		frame_of_reference = im.rotate(i)
-		im_pixels = list(im.getdata())
-		im_sim_pixels 
+	frame_of_reference = #take the smallest possible unit (5 pixel to 5 pixel)
+	#search for the existence of T in the image captured by the camera
+	if #there exist T in the image:
+		image_comparison_1 = #Slice up this particular T
+		image_comparsion_2 = #store up the upright T image 
+		degree_of_rotation = Image.dispacement.rotation()
+		return degree_of_rotation 
+	if [[0 for i in range(20)] for j in range(20)] == list(robot_image.getdata())
 		
 
 def main():
