@@ -39,13 +39,14 @@ def rotation():
 	
 	#Stage 1
 	frame_of_reference = #take the smallest possible unit (5 pixel to 5 pixel)
-	#search for the existence of T in the image captured by the camera
-	if #there exist T in the image:
-		image_comparison_1 = #Slice up this particular T
-		image_comparsion_2 = #store up the upright T image 
-		degree_of_rotation = Image.dispacement.rotation()
-		return degree_of_rotation 
-	if [[0 for i in range(20)] for j in range(20)] == list(robot_image.getdata())
+	filter = frame_of_reference
+	i = 0
+	for i in range(0,360):
+		frame_of_reference_rotated = frame_of_reference.Image.rotate(i)
+		if #use PIL Image filter to check for the existence of T, comparsion is rotated frame of reference and the image captured:
+			degree_of_rotation = Image.dispacement.rotation(frame_of_reference_rotated, frame_of_reference)
+			return degree_of_rotation 
+	if [[0 for i in range(20)] for j in range(20)] == list(robot_image.getdata()) # reshape this as a
 		
 
 def main():
