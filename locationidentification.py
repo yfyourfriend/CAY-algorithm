@@ -1,11 +1,9 @@
 #!/usr/bin/python
 from PIL import Image
-from numpy import *
-import numpy as *
-from random import *
-from bidict import *
-from scipy import *
+import numpy as np
 from binmaryMatrix_to_JPEG import *
+import sensor, image, time
+
 
 def location_identification(binaryMatrix, robot_image_binary_matrix, k):
 	"""
@@ -25,11 +23,24 @@ def location_identification(binaryMatrix, robot_image_binary_matrix, k):
 				return (row, row + 19, column, column + 19)
 	return 0
 
-def rotate_image():
-    """
-    This function takes in the robot_image and transforms it with various degree of freedom and then outputs a k x k image 
-    """
-    pass
+
+
+def rotation():
+	"""
+	We will use a frame of reference (The Y as a reference frame) to compare the degree of rotation and return it. This is the
+	simplest case we can try to solve. 
+	In the 2nd stage, we check if the image captured is all black or all white. 
+	In the 3 stage (the most complicated case: where there is no complete Y in the image captured, rather fragments of this. Figure 
+	out a way to find out the location here.
+	"""
+	
+	#Stage 1
+	frame_of_reference = #take the smallest possible unit (5 pixel to 5 pixel) 
+	for i in range(0,360):
+		frame_of_reference = im.rotate(i)
+		im_pixels = list(im.getdata())
+		im_sim_pixels 
+		
 
 def main():
     im=Image.open(#The big binary image created path here)
