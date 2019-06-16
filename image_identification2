@@ -6,7 +6,8 @@ from binmaryMatrix_to_JPEG import *
 def find_image(big_image, small_image):
     # This function takes in 2 arguments and returns the position of the small image inside the big image, if there is
     # take note that this function was written for opencv, need to change certain parts
-    # link: https://stackoverflow.com/questions/29663764/determine-if-an-image-exists-within-a-larger-image-and-if-so-find-it-using-py
+    # link: https://stackoverflow.com/questions/29663764/determine-if-an-image-exists-within
+    -a-larger-image-and-if-so-find-it-using-py
     big_image = np.atleast_3d(big_image)
     small_image = np.atleast_3d(small_image)
     H, W, D = im.shape[:3]
@@ -29,25 +30,20 @@ def find_image(big_image, small_image):
 
     return False
 
-def rotation():
+def rotation(frame_of_reference, openmv_image):
     """
     We will use a frame of reference (The Y as a reference frame) to compare the degree of rotation and return it. This is the
-    simplest case we can try to solve.
-    In the 2nd stage, we check if the image captured is all black or all white - (In our current map, there are exactly only 1 all
-    black case and 0 all white square.
-    In the 3 stage (the most complicated case: where there is no complete Y in the image captured, rather fragments of Y or no Y at all. Figure
-    out a way to find out the location here.
+    highly inefficient. 
+    We also need to find out if find_image can be used in this instance. If the comparison of sets of lists, then it might not
+    work. See to a function/algorithm I can find. 
     """
-
-    #Stage 1
-    frame_of_reference = 5#take the smallest possible unit (5 pixel to 5 pixel)
     i = 0
     for i in range(0,360):
         frame_of_reference_rotated = frame_of_reference.Image.rotate(i)
-        if find_image(frame_of_reference_rotated, #image_captured_by_robot) != False:
+        if find_image(frame_of_reference_rotated, openmv_image) != False:
                 degree_of_rotation = i
-                (a,b,c,d) = find_image(frame_of_reference_rotated, image_captured_by_robot)
-                if image_from_opnemv.Image.crop(a,b,c,d) == frame_of_reference_rotated: #Indentation error here. Fix later
+                (a,b,c,d) = find_image(openmv_image, frame_of_reference_rotated)
+                if openmv_image.Image.crop(a,b,c,d) == frame_of_reference_rotated: #Indentation error here. Fix later
                         return degree_of_rotation
 
 
@@ -55,12 +51,21 @@ def rotation():
 
 
 def main():
+    """
     im=Image.open("test1.jpeg")
     robot_image = Image.open("insert the path here")
     robot_image.show
     robot_image_pixels = list(robot_image_rgb.getdata()) #Here can we bracktact to a binary image and transform the image to a 4x4 matix?
     # Then we can run through the location_identification function with the big binary image and the frame captured by the window to get the location
     (x,y) = location_identification(binaryMatrix, robot_image_binary_matrix, k)
-
+    """
+    large_map = #here will be the 75 x 75 map
+    frame_of_reference = #the program will store the upright image of Y here
+    openmv_image = #the image captured by the openmv will be obtained as an input here
+    degree_of_rotation = rotation(frame_of_reference, openmv_image)
+    upright_openmv_image = openmv_image.rotate(degree_of_rotation)
+    position_of_image = find_image(large_map, upright_openmv_image)
+    print(position_of_image)
+    
 
 main()
