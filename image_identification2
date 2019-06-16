@@ -37,10 +37,12 @@ def rotation(frame_of_reference, openmv_image):
     for i in range(0,360):
         frame_of_reference_rotated = frame_of_reference.Image.rotate(i)
         if find_image(frame_of_reference_rotated, openmv_image) != False:
-                degree_of_rotation = i
-                (a,b,c,d) = find_image(openmv_image, frame_of_reference_rotated)
-                if openmv_image.Image.crop(a,b,c,d) == frame_of_reference_rotated: #Indentation error here. Fix later
-                        return degree_of_rotation
+            degree_of_rotation = i
+            (a,b,c,d) = find_image(openmv_image, frame_of_reference_rotated)
+            if openmv_image.Image.crop(a,b,c,d) == frame_of_reference_rotated:
+                return degree_of_rotation
+        else:
+            i += 1
 
 def main():
     large_map = Image_Generation.output_mat
