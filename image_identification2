@@ -32,8 +32,6 @@ def rotation(frame_of_reference, openmv_image):
     """
     We will use a frame of reference (The Y as a reference frame) to compare the degree of rotation and return it. This is the
     highly inefficient. 
-    We also need to find out if find_image can be used in this instance. If the comparison of sets of lists, then it might not
-    work. See to a function/algorithm I can find. 
     """
     i = 0
     for i in range(0,360):
