@@ -48,10 +48,26 @@ def rotation(frame_of_reference, openmv_image):
             i += 1
 
 def main():
+    """
+    The input below, from Image_generation must be in the correct format: a 75 x 75 array of RGB pixels. 
+    So, ensure that the correct object is imported
+    """
     large_map = Image_Generation.output_mat
-    frame_of_reference = #the program will store the upright image of Y here
+    
+    """
+    This object will store the upright image of Y as a basis of comparison. Once again, ensure that the correct Object is
+    imported
+    """
+    frame_of_reference = Image_Generation.xxx
+    
+    """
+    Once again, ensure that the image is in the right format. This function will must include getdata() and setting it up into an
+    matrix of size 20 x 20
+    """
     openmv_image = #the image captured by the openmv will be obtained as an input here
+    
     degree_of_rotation = rotation(frame_of_reference, openmv_image)
+    
     #substract 360 degree here to as the degree_of_rotation mentioned directly above is based on the positive y axis
     upright_openmv_image = openmv_image.rotate(360 - degree_of_rotation)
     position_of_image = find_image(large_map, upright_openmv_image)
