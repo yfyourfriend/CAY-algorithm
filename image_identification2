@@ -1,13 +1,11 @@
 #!/usr/bin/python
 from PIL import Image
 import numpy as np
-from binmaryMatrix_to_JPEG import *
+from Image_Generation import *
 
 def find_image(big_image, small_image):
     # This function takes in 2 arguments and returns the position of the small image inside the big image, if there is
-    # take note that this function was written for opencv, need to change certain parts
-    # link: https://stackoverflow.com/questions/29663764/determine-if-an-image-exists-within
-    -a-larger-image-and-if-so-find-it-using-py
+    # link: https://stackoverflow.com/questions/29663764/determine-if-an-image-exists-within-a-larger-image-and-if-so-find-it-using-py
     big_image = np.atleast_3d(big_image)
     small_image = np.atleast_3d(small_image)
     H, W, D = im.shape[:3]
@@ -47,15 +45,7 @@ def rotation(frame_of_reference, openmv_image):
                         return degree_of_rotation
 
 def main():
-    """
-    im=Image.open("test1.jpeg")
-    robot_image = Image.open("insert the path here")
-    robot_image.show
-    robot_image_pixels = list(robot_image_rgb.getdata()) #Here can we bracktact to a binary image and transform the image to a 4x4 matix?
-    # Then we can run through the location_identification function with the big binary image and the frame captured by the window to get the location
-    (x,y) = location_identification(binaryMatrix, robot_image_binary_matrix, k)
-    """
-    large_map = #here will be the 75 x 75 map
+    large_map = Image_Generation.output_mat
     frame_of_reference = #the program will store the upright image of Y here
     openmv_image = #the image captured by the openmv will be obtained as an input here
     degree_of_rotation = rotation(frame_of_reference, openmv_image)
