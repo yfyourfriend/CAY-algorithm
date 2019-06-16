@@ -50,7 +50,9 @@ def rotation(frame_of_reference, openmv_image):
 def main():
     """
     The input below, from Image_generation must be in the correct format: a 75 x 75 array of RGB pixels. 
-    So, ensure that the correct object is imported
+    So, ensure that the correct object is imported>
+    This is because in the find_image function, it is the pixel by pixel correspondence between the large_map/openmv_image & 
+    frame_of_reference (look at the link above for more information) 
     """
     large_map = Image_Generation.output_mat
     
