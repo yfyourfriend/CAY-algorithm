@@ -11,15 +11,30 @@ def big_M(input_mat):
     # define 5 times bigger matrix
     output_mat = [[0 for i in range(5*lenmat)] for j in range(5*lenmat)]
     # define shape for 0
-    shape_zero = [[0 for i in range(5)] for j in range(5)]
+    shape_zero = [[1 for i in range(5)] for j in range(5)]
+    shape_zero[2][2]=0
+    shape_zero[2][3]=0
+    shape_zero[2][4]=0
+    shape_zero[3][2]=0
+    shape_zero[3][4]=0
+    shape_zero[4][2]=0
+    shape_zero[4][3]=0
+    shape_zero[4][4]=0
+
     # define shape for 1
     shape_one = [[1 for i in range(5)] for j in range(5)]
+    shape_one[2][3] = 0
+    shape_one[3][3] = 0
+    shape_one[4][3] = 0
+    shape_one[3][4] = 0
+    shape_one[3][2] = 0
+
     # define shape for -1
-    shape_min = [[0 for i in range(5)] for j in range(5)]
-    shape_min[3][3] = 1
-    shape_min[2][2] = 1
-    shape_min[4][4] = 1
-    shape_min[2][4] = 1
+    shape_min = [[1 for i in range(5)] for j in range(5)]
+    shape_min[3][3] = 0
+    shape_min[2][2] = 0
+    shape_min[4][4] = 0
+    shape_min[2][4] = 0
 
     for i in range(lenmat):
         for j in range(lenmat):
@@ -77,12 +92,12 @@ def save_image(binaryMatrix):
     binaryMatrix = np.array(binaryMatrix)
     binaryMatrix = (binaryMatrix * 255).astype(np.uint8)
     im = Image.fromarray(binaryMatrix)
-    im.save("BinaryMatoriginal" + ".jpeg", "JPEG")
+    im.save("BinaryMatoriginal" + ".png", "PNG")
     A4len = 2480
     # 2480 divide by total Pixels per length of matrix note k=4 this is hardcoded
     # required_DPI = 2480 / (15*5)
     im = im.resize((A4len,A4len), Image.ANTIALIAS)
-    im.save("BinaryMatA4size" + ".jpeg", "JPEG")
+    im.save("BinaryMatA4size" + ".png", "PNG")
     return
 
 def main():
