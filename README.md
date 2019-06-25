@@ -1,4 +1,6 @@
 # CAY-algorithm
+
+## An Informative Description (by Chris)
 In this project, we are trying to make a robot to scan dots in order for it to know its position. 
 The sequence of the dots are unique from each other, and therefore each location has a unique sets of dots, 
 which the robot will scan and read.
@@ -17,3 +19,40 @@ the robot already knows the picture of all the dots in the paper located underne
 of the paper, the robot only has a small part of all the sequences of dots. Since the sequences are unique, the robot can then compare the
 image which it has captured underneath it with a full map that it already has inside its brain. Therefore the robot will know its location
 in the big paper.
+
+## Instructions
+- The software consists of 2 components:
+	1. Microchip Main
+	2. Utilities
+
+Some code exist only on the microchip, while some are utilities meant to be run on the computer. 
+
+Let us start by discussing the utilities
+
+### Util
+1. deBruijn(k)
+	- Command line argument
+		- give it the k value and 2 matrices will be written onto the local folder. 
+2. pdf_overlay(code, score)
+	- Takes in 2k-1 by 2k-1 matrix (in image form) and score to be overlay as input. 
+	- First, another image-recognition utility is called (analyse_music.py), returning regions of sheet music as a list of matrices. 
+	- Second, the list of matrices is passed on to the main of pdf_overlay. 
+		- In the simplest version, the k_used has been completely determined by the length of sheet music.
+			- And we need to have k < music_len
+		- Future revision
+			- Do logic check that k is appropriate
+			- Customisable k; scaling
+		- for each line (**NAME**), the image is overlay
+	- Output: pdf file with overlay image written on disk. 
+
+- Current progress (YF):
+	1. Partition analyse_music.py so that **list of lists is output per input sheet music**
+	2. Write the routine for remaining main of pdf_overlay
+	3. (LATER) Speaker and steps to do speaker
+
+### Main
+- preprocess(image)
+- binarytranslate(image)
+	- outputs k by k matrix
+- localisation
+- out_music(window)
