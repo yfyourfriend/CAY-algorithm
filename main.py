@@ -17,6 +17,7 @@ sensor.skip_frames(time = 2000)
 pin0 = Pin('P0', Pin.IN, Pin.PULL_UP)
 
 while(True):
+    # Product/Robot is always on standby for button press
     if pin0.value()==False:
         img = sensor.snapshot()
         # call routine for preprocessing
