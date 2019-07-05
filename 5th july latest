@@ -145,10 +145,12 @@ def dist(X, Y):
 
 
 def get_list_of_list(window):
-    print(template1.size())
+    #print(template1.size())
     template1.to_grayscale()
     template2.to_grayscale()
     template3.to_grayscale()
+    #print(template1.width())
+    #print(template1.height())
     list_1 = [0,0,0,0]
     list_2 = [0,0,0,0]
     list_3 = [0,0,0,0]
@@ -168,11 +170,11 @@ def get_list_of_list(window):
                 x = width_window-i
             if j != 0:
                 y = width_window-j
-            if window.find_template(template3, 0.6, (x,y,width_window,width_window)) != None:
+            if window.find_template(template3, 0.65, (x,y,width_window,width_window)) != None:
                 list_of_list[i][j] = -1
-            elif window.find_template(template1, 0.8, (x,y, width_window,width_window)) != None:
+            elif window.find_template(template1, 0.65, (x,y, width_window,width_window)) != None:
                 list_of_list[i][j] = 1
-            elif window.find_template(template2, 0.8, (x,y,width_window,width_window)) != None:
+            elif window.find_template(template2, 1.00, (x,y,width_window,width_window)) != None:
                 list_of_list[i][j] = 0
 
     return list_of_list
