@@ -1,0 +1,205 @@
+# Hello World Example
+#
+# Welcome to the OpenMV IDE! Click on the green run arrow button below to run the script!
+
+import sensor, image, time
+
+sensor.reset()                      # Reset and initialize the sensor.
+sensor.set_pixformat(sensor.RGB565) # Set pixel format to RGB565 (or GRAYSCALE)
+sensor.set_framesize(sensor.QVGA)   # Set frame size to QVGA (320x240)
+sensor.skip_frames(time = 2000)     # Wait for settings take effect.
+clock = time.clock()                # Create a clock object to track the FPS.
+
+
+"""
+def localize(window):
+    # INPUT : A k by k window
+    # OUTPUT: (x,y) the top-left corner
+    # rows are indexed 0,1,2... from TOP to BOTTOM
+    # columns are indexed 0,1,2,... from LEFT to RIGHT
+
+    k = len(window)
+
+    diffrow = []
+    for j in range(k - 1):
+        count = {0: 0, 1: 0}
+        for i in range(k):
+            diff = (window[i][j] + window[i][j + 1]) % 2
+            count[diff] += 1
+        if count[0] >= count[1]:
+            diffrow += [0]
+        else:
+            diffrow += [1]
+    # print("possible diff vectors:\t\t", diffrow)
+    row1 = [0]
+    row2 = [1]
+
+    for i in range(k - 1):
+        row1 += [(row1[i] + diffrow[i]) % 2]
+        row2 += [(row2[i] + diffrow[i]) % 2]
+
+    # print("possible row candidate 1:\t", row1)
+    # print("possible row candidate 2:\t", row2)
+    # print()
+
+    diffcol = []
+    for i in range(k - 1):
+        count = {0: 0, 1: 0}
+        for j in range(k):
+            diff = (window[i][j] + window[i + 1][j]) % 2
+            count[diff] += 1
+        if count[0] >= count[1]:
+            diffcol += [0]
+        else:
+            diffcol += [1]
+
+    # print("possible diff vectors:\t\t", diffcol)
+    col1 = [0]
+    col2 = [1]
+
+    for i in range(k - 1):
+        col1 += [(col1[i] + diffcol[i]) % 2]
+        col2 += [(col2[i] + diffcol[i]) % 2]
+
+    # print("possible col candidate 1:\t", col1)
+    # print("possible col candidate 2:\t", col2)
+
+    W11 = [[row1[j] - col1[i] for j in range(k)] for i in range(k)]
+    # print()
+    # print("W11:")
+    # showarray(W11)
+    d11 = dist(W11, window)
+    # print("dist:", d11)
+
+    W12 = [[row1[j] - col2[i] for j in range(k)] for i in range(k)]
+    # print()
+    # print("W12:")
+    # showarray(W12)
+    d12 = dist(W12, window)
+    # print("dist:", d12)
+
+    W21 = [[row2[j] - col1[i] for j in range(k)] for i in range(k)]
+    # print()
+    # print("W21:")
+    # showarray(W21)
+    d21 = dist(W21, window)
+    # print("dist:", d21)
+
+    W22 = [[row2[j] - col2[i] for j in range(k)] for i in range(k)]
+    # print()
+    # print("W22:")
+    # showarray(W22)
+    d22 = dist(W22, window)
+    # print("dist:", d22)
+
+    if d11 == min([d11, d12, d21, d22]):
+        row = row1
+        col = col1
+    elif d12 == min([d11, d12, d21, d22]):
+        row = row1
+        col = col2
+    elif d21 == min([d11, d12, d21, d22]):
+        row = row2
+        col = col1
+    else:
+        row = row2
+        col = col2
+    # print()
+
+    # print("Final choice!")
+    # print("row :", row )
+    # print("col :", col )
+
+    dbseq = deBruijn(k)
+
+    for x in range(n - k + 1):
+        if dbseq[x:x + k] == row: break
+
+    for y in range(n - k + 1):
+        if dbseq[y:y + k] == col: break
+
+    # print("window is at x = {}, y = {}".format(x,y))
+
+    return (x, y)
+
+
+def dist(X, Y):
+    # INPUT: X, Y, k by k windows
+    # OUTPUT: Hamming distance between X and Y
+
+    k = len(X)
+    d = 0
+
+    for i in range(k):
+        for j in range(k):
+            if X[i][j] != Y[i][j]: d += 1
+    return d
+
+"""
+
+
+
+def get_list_of_list(window):
+    template2 = image.Image("zero.pgm")
+    template1 = image.Image("one.pgm")
+    template3 = image.Image("min.pgm")
+    print(template1.size())
+    template1.to_grayscale()
+    template2.to_grayscale()
+    template3.to_grayscale()
+    list_1 = [0,0,0,0]
+    list_2 = [0,0,0,0]
+    list_3 = [0,0,0,0]
+    list_4 = [0,0,0,0]
+    list_of_list = [list_1, list_2, list_3, list_4]
+    x = 0
+    y = 0
+    for i in range(0,4):
+        for j in range(0,4):
+            if i == 1:
+                x = 29
+            if i == 2:
+                x = 59
+            if i == 3:
+                x = 89
+            if j == 1:
+                y = 29
+            if j == 2:
+                y = 59
+            if j == 3:
+                y = 89
+            if window.find_template(template1, 0.8, (x,y, width_window,width_window)) != None:
+                list_of_list[i][j] = 1
+            elif window.find_template(template2, 0.8, (x,y,width_window,width_window)) != None:
+                list_of_list[i][j] = 0
+            elif window.find_template(template3, 0.8, (x,y,width_window,width_window)) != None:
+                list_of_list[i][j] = -1
+    return list_of_list
+
+sensor.set_framesize(sensor.QQVGA)                  #Camera roughly 4.2 cm from the paper
+sensor.set_windowing((120,120))
+
+# set k value for calculation
+k = 4
+
+while(True):
+    clock.tick()                    # Update the FPS clock.
+    window = sensor.snapshot()      # Take a picture and return the image.
+    window.to_grayscale()
+    width = window.width()
+    height = window.height()
+    width_window = width//k
+    height_window = height//k
+    print(width_window)
+
+    window.lens_corr(1.3)
+
+    #window.scale((),0.0625, 0.083 )
+    print(window.size)
+    list_of_list = get_list_of_list(window)
+    print(list_of_list)
+    # location_tuple = localise(list_of_list)
+    time.sleep(5000)
+
+    #print(clock.fps())              # Note: OpenMV Cam runs about half as fast when connected
+                                    # to the IDE. The FPS should increase once disconnected.
