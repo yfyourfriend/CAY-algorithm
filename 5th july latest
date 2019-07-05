@@ -10,6 +10,11 @@ sensor.set_framesize(sensor.QVGA)   # Set frame size to QVGA (320x240)
 sensor.skip_frames(time = 2000)     # Wait for settings take effect.
 clock = time.clock()                # Create a clock object to track the FPS.
 
+template2 = image.Image("zero.pgm")
+template1 = image.Image("one.pgm")
+template3 = image.Image("min.pgm")
+
+
 
 """
 def localize(window):
@@ -140,9 +145,6 @@ def dist(X, Y):
 
 
 def get_list_of_list(window):
-    template2 = image.Image("zero.pgm")
-    template1 = image.Image("one.pgm")
-    template3 = image.Image("min.pgm")
     print(template1.size())
     template1.to_grayscale()
     template2.to_grayscale()
@@ -154,30 +156,29 @@ def get_list_of_list(window):
     list_of_list = [list_1, list_2, list_3, list_4]
     x = 0
     y = 0
+    # If the first argument is a scaler then this method expects
+    # to see x0, y0, x1, and y1. Otherwise, it expects a (x0,y0,x1,y1) tuple.
+    for i in range(1,4):
+        window.draw_line(0, width_window*i, width, width_window*i,(256,0,0),2)
+        window.draw_line(width_window*i, 0, width_window*i,width,(0,0,256),2)
+
     for i in range(0,4):
         for j in range(0,4):
-            if i == 1:
-                x = 29
-            if i == 2:
-                x = 59
-            if i == 3:
-                x = 89
-            if j == 1:
-                y = 29
-            if j == 2:
-                y = 59
-            if j == 3:
-                y = 89
-            if window.find_template(template1, 0.8, (x,y, width_window,width_window)) != None:
+            if i != 0:
+                x = width_window-i
+            if j != 0:
+                y = width_window-j
+            if window.find_template(template3, 0.6, (x,y,width_window,width_window)) != None:
+                list_of_list[i][j] = -1
+            elif window.find_template(template1, 0.8, (x,y, width_window,width_window)) != None:
                 list_of_list[i][j] = 1
             elif window.find_template(template2, 0.8, (x,y,width_window,width_window)) != None:
                 list_of_list[i][j] = 0
-            elif window.find_template(template3, 0.8, (x,y,width_window,width_window)) != None:
-                list_of_list[i][j] = -1
+
     return list_of_list
 
 sensor.set_framesize(sensor.QQVGA)                  #Camera roughly 4.2 cm from the paper
-sensor.set_windowing((120,120))
+sensor.set_windowing((75,75))
 
 # set k value for calculation
 k = 4
@@ -192,14 +193,17 @@ while(True):
     height_window = height//k
     print(width_window)
 
+    # preprocessing
     window.lens_corr(1.3)
+    window.morph(1,[0,1,0,1,1,1,0,1,0])
+    #window.remove_shadows()
 
     #window.scale((),0.0625, 0.083 )
     print(window.size)
     list_of_list = get_list_of_list(window)
     print(list_of_list)
     # location_tuple = localise(list_of_list)
-    time.sleep(5000)
+    time.sleep(300)
 
     #print(clock.fps())              # Note: OpenMV Cam runs about half as fast when connected
                                     # to the IDE. The FPS should increase once disconnected.
