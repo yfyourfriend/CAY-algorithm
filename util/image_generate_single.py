@@ -198,33 +198,43 @@ def main():
     # Display image using PIL library
     show_image(output_mat)
     """
+
 # define shape for 0
 shape_zero = [[1 for i in range(5)] for j in range(5)]
-shape_zero[2][2]=0
+shape_zero[1][1]=0
+shape_zero[1][2]=0
+shape_zero[1][3]=0
+shape_zero[2][1]=0
 shape_zero[2][3]=0
-shape_zero[2][4]=0
+shape_zero[3][1]=0
 shape_zero[3][2]=0
-shape_zero[3][4]=0
-shape_zero[4][2]=0
-shape_zero[4][3]=0
-shape_zero[4][4]=0
+shape_zero[3][3]=0
 
 # define shape for 1
 shape_one = [[1 for i in range(5)] for j in range(5)]
-shape_one[2][3] = 0
-shape_one[3][3] = 0
-shape_one[4][3] = 0
-shape_one[3][4] = 0
+shape_one[1][2] = 0
+shape_one[2][2] = 0
 shape_one[3][2] = 0
+shape_one[2][3] = 0
+shape_one[2][1] = 0
 
 # define shape for -1
 shape_min = [[1 for i in range(5)] for j in range(5)]
-shape_min[3][3] = 0
 shape_min[2][2] = 0
-shape_min[4][4] = 0
-shape_min[2][4] = 0
+shape_min[1][1] = 0
+shape_min[3][3] = 0
+shape_min[1][3] = 0
 
-Image.fromarray(np.uint8(shape_one)).save('one.bmp')
-Image.fromarray(np.uint8(shape_zero)).save('zero.bmp')
-Image.fromarray(np.uint8(shape_min)).save('min.bmp')
+shape_one= np.array(shape_one)
+shape_one= (shape_one *255).astype(np.uint8)
+Image.fromarray(shape_one).save('one'+ '.pgm','PPM')
+
+shape_zero= np.array(shape_zero)
+shape_zero= (shape_zero *255).astype(np.uint8)
+Image.fromarray(shape_zero).save('zero'+ '.pgm','PPM')
+
+shape_min= np.array(shape_min)
+shape_min= (shape_min *255).astype(np.uint8)
+Image.fromarray(shape_min).save('min'+ '.pgm','PPM')
+
 
