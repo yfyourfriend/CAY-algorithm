@@ -18,4 +18,7 @@
 	- matplotlib 3.1.1
 	- skimage 0.16
 
+## Preview
+- [Examples of pdf_overlay](https://drive.google.com/drive/folders/1cXX94R2EeneKhxFYtUc7u1llCFjh33oz?usp=sharing)
+- [Photographs and video preview of project](https://drive.google.com/drive/folders/18UC4WWGArXsDx5-VeH6pRos0mPA1scMM?usp=sharing)
 
