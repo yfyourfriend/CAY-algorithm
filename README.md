@@ -8,7 +8,7 @@
 	2. Web server on [ESPRESSIF ESP32-WROOM-32](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf)
 	3. Utilities on Linux / arbitrary computer
 		- pdf_overlay using reportlab, pypdf2 and their pre-requisites
-		- score_partitioning; image processing for sheet music to automatically generate parameters (length of each musical bar etc) for reportlab
+		- score_partitioning; image processing for sheet music to automatically generate parameters (length of each musical bar etc) for reportlab pdf generation
 
 ## Software pre-requisites
 	- python 3.6
